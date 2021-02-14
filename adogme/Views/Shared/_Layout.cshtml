@@ -22,8 +22,30 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Catalogs", "About", "Home")</li>
-                   
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catalogs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Dogs")">Dogs</a>
+                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Partner")">Partner</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Configuration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Breed")">Breed</a>
+                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Gender")">Gender</a>
+                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Place")">Place</a>
+                        </div>
+                    </li>
+                    <li>@Html.ActionLink("Index", "Index", "Adoption")</li>
+                    <li>@Html.ActionLink("Index", "Index", "Blog")</li>
+                    <li>@Html.ActionLink("Index", "Index", "History")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
