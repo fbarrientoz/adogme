@@ -1,0 +1,51 @@
+﻿@model IEnumerable<adogme.Models.HISTORY>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ADOPTER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HISTORY1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PICTURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOG.NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADOPTER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HISTORY1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PICTURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOG.NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

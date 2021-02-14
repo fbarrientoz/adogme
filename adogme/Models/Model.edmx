@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="adogmeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADOPTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FULL_NAME" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOG_ID" Type="int" Nullable="false" />
+          <Property Name="REGISTER" Type="datetime" Nullable="false" />
+          <Property Name="ESTATUS" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITLE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BODY" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AUTHOR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BREED">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BREED" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CITY" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BREED_ID" Type="int" Nullable="false" />
+          <Property Name="GENDER_ID" Type="int" Nullable="false" />
+          <Property Name="SIZE_ID" Type="int" Nullable="false" />
+          <Property Name="PLACE_ID" Type="int" Nullable="false" />
+          <Property Name="IS_ADOPTED" Type="bit" Nullable="false" />
+          <Property Name="REGISTER" Type="datetime" Nullable="false" />
+          <Property Name="PICTURE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AGE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENDER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GENDER" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOG_ID" Type="int" Nullable="false" />
+          <Property Name="ADOPTER_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HISTORY" Type="varchar(max)" Nullable="false" />
+          <Property Name="PICTURE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARTNERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PICTURE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLACE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLACE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SIZE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SIZE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ADOPTION_DOG">
+          <End Role="DOG" Type="Self.DOG" Multiplicity="1" />
+          <End Role="ADOPTION" Type="Self.ADOPTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ADOPTION">
+              <PropertyRef Name="DOG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_BREED">
+          <End Role="BREED" Type="Self.BREED" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BREED">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="BREED_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_GENDER">
+          <End Role="GENDER" Type="Self.GENDER" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENDER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="GENDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_PLACE">
+          <End Role="PLACE" Type="Self.PLACE" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLACE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="PLACE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_SIZE">
+          <End Role="SIZE" Type="Self.SIZE" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIZE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="SIZE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORY_DOG">
+          <End Role="DOG" Type="Self.DOG" Multiplicity="1" />
+          <End Role="HISTORY" Type="Self.HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="DOG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adogmeModelStoreContainer">
+          <EntitySet Name="ADOPTION" EntityType="Self.ADOPTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BLOG" EntityType="Self.BLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BREED" EntityType="Self.BREED" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOG" EntityType="Self.DOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENDER" EntityType="Self.GENDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORY" EntityType="Self.HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARTNERS" EntityType="Self.PARTNERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLACE" EntityType="Self.PLACE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIZE" EntityType="Self.SIZE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ADOPTION_DOG" Association="Self.FK_ADOPTION_DOG">
+            <End Role="DOG" EntitySet="DOG" />
+            <End Role="ADOPTION" EntitySet="ADOPTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_BREED" Association="Self.FK_DOG_BREED">
+            <End Role="BREED" EntitySet="BREED" />
+            <End Role="DOG" EntitySet="DOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_GENDER" Association="Self.FK_DOG_GENDER">
+            <End Role="GENDER" EntitySet="GENDER" />
+            <End Role="DOG" EntitySet="DOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_PLACE" Association="Self.FK_DOG_PLACE">
+            <End Role="PLACE" EntitySet="PLACE" />
+            <End Role="DOG" EntitySet="DOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_SIZE" Association="Self.FK_DOG_SIZE">
+            <End Role="SIZE" EntitySet="SIZE" />
+            <End Role="DOG" EntitySet="DOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_DOG" Association="Self.FK_HISTORY_DOG">
+            <End Role="DOG" EntitySet="DOG" />
+            <End Role="HISTORY" EntitySet="HISTORY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="adogmeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADOPTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FULL_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="REGISTER" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DOG" Relationship="Self.FK_ADOPTION_DOG" FromRole="ADOPTION" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="BLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BODY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AUTHOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="BREED">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BREED1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOGs" Relationship="Self.FK_DOG_BREED" FromRole="BREED" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="DOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BREED_ID" Type="Int32" Nullable="false" />
+          <Property Name="GENDER_ID" Type="Int32" Nullable="false" />
+          <Property Name="SIZE_ID" Type="Int32" Nullable="false" />
+          <Property Name="PLACE_ID" Type="Int32" Nullable="false" />
+          <Property Name="IS_ADOPTED" Type="Boolean" Nullable="false" />
+          <Property Name="REGISTER" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PICTURE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADOPTIONs" Relationship="Self.FK_ADOPTION_DOG" FromRole="DOG" ToRole="ADOPTION" />
+          <NavigationProperty Name="BREED" Relationship="Self.FK_DOG_BREED" FromRole="DOG" ToRole="BREED" />
+          <NavigationProperty Name="GENDER" Relationship="Self.FK_DOG_GENDER" FromRole="DOG" ToRole="GENDER" />
+          <NavigationProperty Name="PLACE" Relationship="Self.FK_DOG_PLACE" FromRole="DOG" ToRole="PLACE" />
+          <NavigationProperty Name="SIZE" Relationship="Self.FK_DOG_SIZE" FromRole="DOG" ToRole="SIZE" />
+          <NavigationProperty Name="HISTORies" Relationship="Self.FK_HISTORY_DOG" FromRole="DOG" ToRole="HISTORY" />
+        </EntityType>
+        <EntityType Name="GENDER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GENDER1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOGs" Relationship="Self.FK_DOG_GENDER" FromRole="GENDER" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="ADOPTER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HISTORY1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PICTURE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOG" Relationship="Self.FK_HISTORY_DOG" FromRole="HISTORY" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="PARTNER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PICTURE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLACE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLACE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOGs" Relationship="Self.FK_DOG_PLACE" FromRole="PLACE" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="SIZE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SIZE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOGs" Relationship="Self.FK_DOG_SIZE" FromRole="SIZE" ToRole="DOG" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ADOPTION_DOG">
+          <End Role="DOG" Type="Self.DOG" Multiplicity="1" />
+          <End Role="ADOPTION" Type="Self.ADOPTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ADOPTION">
+              <PropertyRef Name="DOG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_BREED">
+          <End Role="BREED" Type="Self.BREED" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BREED">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="BREED_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_GENDER">
+          <End Role="GENDER" Type="Self.GENDER" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENDER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="GENDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_PLACE">
+          <End Role="PLACE" Type="Self.PLACE" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLACE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="PLACE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOG_SIZE">
+          <End Role="SIZE" Type="Self.SIZE" Multiplicity="1" />
+          <End Role="DOG" Type="Self.DOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIZE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOG">
+              <PropertyRef Name="SIZE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORY_DOG">
+          <End Role="DOG" Type="Self.DOG" Multiplicity="1" />
+          <End Role="HISTORY" Type="Self.HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="DOG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adogmeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADOPTIONs" EntityType="Self.ADOPTION" />
+          <EntitySet Name="BLOGs" EntityType="Self.BLOG" />
+          <EntitySet Name="BREEDs" EntityType="Self.BREED" />
+          <EntitySet Name="DOGs" EntityType="Self.DOG" />
+          <EntitySet Name="GENDERs" EntityType="Self.GENDER" />
+          <EntitySet Name="HISTORies" EntityType="Self.HISTORY" />
+          <EntitySet Name="PARTNERS" EntityType="Self.PARTNER" />
+          <EntitySet Name="PLACEs" EntityType="Self.PLACE" />
+          <EntitySet Name="SIZEs" EntityType="Self.SIZE" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_ADOPTION_DOG" Association="Self.FK_ADOPTION_DOG">
+            <End Role="DOG" EntitySet="DOGs" />
+            <End Role="ADOPTION" EntitySet="ADOPTIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_BREED" Association="Self.FK_DOG_BREED">
+            <End Role="BREED" EntitySet="BREEDs" />
+            <End Role="DOG" EntitySet="DOGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_GENDER" Association="Self.FK_DOG_GENDER">
+            <End Role="GENDER" EntitySet="GENDERs" />
+            <End Role="DOG" EntitySet="DOGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_PLACE" Association="Self.FK_DOG_PLACE">
+            <End Role="PLACE" EntitySet="PLACEs" />
+            <End Role="DOG" EntitySet="DOGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOG_SIZE" Association="Self.FK_DOG_SIZE">
+            <End Role="SIZE" EntitySet="SIZEs" />
+            <End Role="DOG" EntitySet="DOGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_DOG" Association="Self.FK_HISTORY_DOG">
+            <End Role="DOG" EntitySet="DOGs" />
+            <End Role="HISTORY" EntitySet="HISTORies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="adogmeModelStoreContainer" CdmEntityContainer="adogmeEntities">
+          <EntitySetMapping Name="ADOPTIONs">
+            <EntityTypeMapping TypeName="adogmeModel.ADOPTION">
+              <MappingFragment StoreEntitySet="ADOPTION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FULL_NAME" ColumnName="FULL_NAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="DOG_ID" ColumnName="DOG_ID" />
+                <ScalarProperty Name="REGISTER" ColumnName="REGISTER" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BLOGs">
+            <EntityTypeMapping TypeName="adogmeModel.BLOG">
+              <MappingFragment StoreEntitySet="BLOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+                <ScalarProperty Name="AUTHOR" ColumnName="AUTHOR" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BREEDs">
+            <EntityTypeMapping TypeName="adogmeModel.BREED">
+              <MappingFragment StoreEntitySet="BREED">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BREED1" ColumnName="BREED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOGs">
+            <EntityTypeMapping TypeName="adogmeModel.DOG">
+              <MappingFragment StoreEntitySet="DOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="BREED_ID" ColumnName="BREED_ID" />
+                <ScalarProperty Name="GENDER_ID" ColumnName="GENDER_ID" />
+                <ScalarProperty Name="SIZE_ID" ColumnName="SIZE_ID" />
+                <ScalarProperty Name="PLACE_ID" ColumnName="PLACE_ID" />
+                <ScalarProperty Name="IS_ADOPTED" ColumnName="IS_ADOPTED" />
+                <ScalarProperty Name="REGISTER" ColumnName="REGISTER" />
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENDERs">
+            <EntityTypeMapping TypeName="adogmeModel.GENDER">
+              <MappingFragment StoreEntitySet="GENDER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GENDER1" ColumnName="GENDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORies">
+            <EntityTypeMapping TypeName="adogmeModel.HISTORY">
+              <MappingFragment StoreEntitySet="HISTORY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DOG_ID" ColumnName="DOG_ID" />
+                <ScalarProperty Name="ADOPTER_NAME" ColumnName="ADOPTER_NAME" />
+                <ScalarProperty Name="HISTORY1" ColumnName="HISTORY" />
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTNERS">
+            <EntityTypeMapping TypeName="adogmeModel.PARTNER">
+              <MappingFragment StoreEntitySet="PARTNERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLACEs">
+            <EntityTypeMapping TypeName="adogmeModel.PLACE">
+              <MappingFragment StoreEntitySet="PLACE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PLACE1" ColumnName="PLACE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIZEs">
+            <EntityTypeMapping TypeName="adogmeModel.SIZE">
+              <MappingFragment StoreEntitySet="SIZE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SIZE1" ColumnName="SIZE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="adogmeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
