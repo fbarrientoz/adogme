@@ -35,5 +35,6 @@ namespace adogme.Models
         public virtual DbSet<PLACE> PLACEs { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
     }
 }

@@ -21,6 +21,7 @@
         <AssociationConnector Association="adogmeModel.FK_DOG_PLACE" ManuallyRouted="false" />
         <AssociationConnector Association="adogmeModel.FK_DOG_SIZE" ManuallyRouted="false" />
         <AssociationConnector Association="adogmeModel.FK_HISTORY_DOG" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="adogmeModel.Donation" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

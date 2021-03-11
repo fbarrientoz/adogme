@@ -10,120 +10,107 @@ using adogme.Models;
 
 namespace adogme.Controllers
 {
-    public class PartnerController : Controller
+    public class DonationsController : Controller
     {
         private adogmeEntities db = new adogmeEntities();
 
-        // GET: Partner
+        // GET: Donations
         public ActionResult Index()
         {
-            return View(db.PARTNERS.ToList());
+            return View(db.Donations.ToList());
         }
 
-        // GET: Partner/Details/5
+        // GET: Donations/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTNER pARTNER = db.PARTNERS.Find(id);
-            if (pARTNER == null)
+            Donation donation = db.Donations.Find(id);
+            if (donation == null)
             {
                 return HttpNotFound();
             }
-            return View(pARTNER);
+            return View(donation);
         }
 
-        // GET: Partner/Create
+        // GET: Donations/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Partner/Create        
+        // POST: Donations/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NAME,DESCRIPTION,PICTURE")] PARTNER pARTNER, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Full_Name,Ammount,Date_Donation")] Donation donation)
         {
             if (ModelState.IsValid)
             {
-                if (file != null)
-                {
-                    string ImageName = System.IO.Path.GetFileName(file.FileName);
-                    string physicalPath = Server.MapPath("~/Content/img/partner/" + ImageName);
-                    file.SaveAs(physicalPath);
-                    pARTNER.PICTURE = ImageName;
-
-                }
-                db.PARTNERS.Add(pARTNER);
+                db.Donations.Add(donation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pARTNER);
+            return View(donation);
         }
 
-        // GET: Partner/Edit/5
+        // GET: Donations/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTNER pARTNER = db.PARTNERS.Find(id);
-            if (pARTNER == null)
+            Donation donation = db.Donations.Find(id);
+            if (donation == null)
             {
                 return HttpNotFound();
             }
-            return View(pARTNER);
+            return View(donation);
         }
 
-        // POST: Partner/Edit/5
-    
+        // POST: Donations/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NAME,DESCRIPTION,PICTURE")] PARTNER pARTNER ,HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Full_Name,Ammount,Date_Donation")] Donation donation)
         {
             if (ModelState.IsValid)
             {
-                if (file != null)
-                {
-                    string ImageName = System.IO.Path.GetFileName(file.FileName);
-                    string physicalPath = Server.MapPath("~/Content/img/partner/" + ImageName);
-                    file.SaveAs(physicalPath);
-                    pARTNER.PICTURE = ImageName;
-
-                }
-                db.Entry(pARTNER).State = EntityState.Modified;
+                db.Entry(donation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pARTNER);
+            return View(donation);
         }
 
-        // GET: Partner/Delete/5
+        // GET: Donations/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTNER pARTNER = db.PARTNERS.Find(id);
-            if (pARTNER == null)
+            Donation donation = db.Donations.Find(id);
+            if (donation == null)
             {
                 return HttpNotFound();
             }
-            return View(pARTNER);
+            return View(donation);
         }
 
-        // POST: Partner/Delete/5
+        // POST: Donations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PARTNER pARTNER = db.PARTNERS.Find(id);
-            db.PARTNERS.Remove(pARTNER);
+            Donation donation = db.Donations.Find(id);
+            db.Donations.Remove(donation);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -22,36 +22,44 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="nav-item dropdown">
+
+                    @if (User.Identity.IsAuthenticated)
+                    { 
+                    
+                    <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Catalogs
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Dogs")">Dogs</a>
-                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Partner")">Partner</a>
-
-                        </div>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Dogs", "Index", "Dog")</li>
+                            <li>@Html.ActionLink("Partner", "Index", "Partner")</li>
+                        </ul>
+                        
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Configuration
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Breed")">Breed</a>
-                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Gender")">Gender</a>
-                            <a class="dropdown-item" href="@Html.ActionLink("Index", "Index", "Place")">Place</a>
-                        </div>
+                      
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Breed", "Index", "Breed")</li>
+                                <li>@Html.ActionLink("Gender", "Index", "Gender")</li>
+                                <li>@Html.ActionLink("Place", "Index", "Place")</li>
+                            </ul>
+                            
+                       
                     </li>
-                    <li>@Html.ActionLink("Index", "Index", "Adoption")</li>
-                    <li>@Html.ActionLink("Index", "Index", "Blog")</li>
-                    <li>@Html.ActionLink("Index", "Index", "History")</li>
+                    <li>@Html.ActionLink("Adoption", "Index", "Adoption")</li>
+                    <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+                    <li>@Html.ActionLink("History", "Index", "History")</li>
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
         <hr />
         <footer>

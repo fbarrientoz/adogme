@@ -51,10 +51,17 @@ namespace adogme.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NAME,CITY,BREED_ID,GENDER_ID,SIZE_ID,PLACE_ID,IS_ADOPTED,REGISTER,PICTURE,AGE")] DOG dOG)
+        public ActionResult Create([Bind(Include = "ID,NAME,CITY,BREED_ID,GENDER_ID,SIZE_ID,PLACE_ID,IS_ADOPTED,REGISTER,PICTURE,AGE")] DOG dOG, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string ImageName = System.IO.Path.GetFileName(file.FileName);
+                    string physicalPath = Server.MapPath("~/Content/img/dogs/" + ImageName);
+                    file.SaveAs(physicalPath);
+                    dOG.PICTURE= ImageName;
+                }
                 db.DOGs.Add(dOG);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,10 +98,18 @@ namespace adogme.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NAME,CITY,BREED_ID,GENDER_ID,SIZE_ID,PLACE_ID,IS_ADOPTED,REGISTER,PICTURE,AGE")] DOG dOG)
+        public ActionResult Edit([Bind(Include = "ID,NAME,CITY,BREED_ID,GENDER_ID,SIZE_ID,PLACE_ID,IS_ADOPTED,REGISTER,PICTURE,AGE")] DOG dOG, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string ImageName = System.IO.Path.GetFileName(file.FileName);
+                    string physicalPath = Server.MapPath("~/Content/img/dogs/" + ImageName);
+                    file.SaveAs(physicalPath);
+                    dOG.PICTURE = ImageName;
+
+                }
                 db.Entry(dOG).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

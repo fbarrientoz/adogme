@@ -44,14 +44,21 @@ namespace adogme.Controllers
         }
 
         // POST: History/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DOG_ID,ADOPTER_NAME,HISTORY1,PICTURE")] HISTORY hISTORY)
+        public ActionResult Create([Bind(Include = "ID,DOG_ID,ADOPTER_NAME,HISTORY1,PICTURE")] HISTORY hISTORY, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string ImageName = System.IO.Path.GetFileName(file.FileName);
+                    string physicalPath = Server.MapPath("~/Content/img/history/" + ImageName);
+                    file.SaveAs(physicalPath);
+                    hISTORY.PICTURE = ImageName;
+
+                }
                 db.HISTORies.Add(hISTORY);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,10 +89,18 @@ namespace adogme.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,DOG_ID,ADOPTER_NAME,HISTORY1,PICTURE")] HISTORY hISTORY)
+        public ActionResult Edit([Bind(Include = "ID,DOG_ID,ADOPTER_NAME,HISTORY1,PICTURE")] HISTORY hISTORY, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string ImageName = System.IO.Path.GetFileName(file.FileName);
+                    string physicalPath = Server.MapPath("~/Content/img/history/" + ImageName);
+                    file.SaveAs(physicalPath);
+                    hISTORY.PICTURE = ImageName;
+
+                }
                 db.Entry(hISTORY).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

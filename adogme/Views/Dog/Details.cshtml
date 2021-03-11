@@ -10,6 +10,19 @@
     <h4>DOG</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <div class="row">
+            <div class="col-md-6">
+                <td><img src='@(System.Configuration.ConfigurationManager.AppSettings["URLPublica"] + "/Content/img/dogs/" + Model.PICTURE)' width="150" height="150" /></td>
+                <input type="file" name="file" id="file" style="width: 100%;" /> <br /><br />
+            </div>
+            <div class="col-md-6">
+                @if (ViewBag.imageBytes != null)
+                {
+                    <img width="150" height="150" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" />
+                }
+            </div>
+        </div>
         <dt>
             @Html.DisplayNameFor(model => model.NAME)
         </dt>
@@ -42,10 +55,7 @@
             @Html.DisplayFor(model => model.REGISTER)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PICTURE)
-        </dt>
-
+       
         <dd>
             @Html.DisplayFor(model => model.PICTURE)
         </dd>

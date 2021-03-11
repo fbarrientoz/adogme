@@ -174,6 +174,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\BreedController.cs" />
     <Compile Include="Controllers\DogController.cs" />
+    <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -195,6 +196,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DOG.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Donation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GENDER.cs">
@@ -240,6 +244,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\plugins.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\Style.css" />
+    <Content Include="Content\css\style_1.css" />
+    <Content Include="Content\img\adogme-banner.png" />
+    <Content Include="Content\img\banner-log.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -353,9 +363,20 @@
     <Content Include="Views\Size\Details.cshtml" />
     <Content Include="Views\Size\Edit.cshtml" />
     <Content Include="Views\Size\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_Public.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Donations\Create.cshtml" />
+    <Content Include="Views\Donations\Delete.cshtml" />
+    <Content Include="Views\Donations\Details.cshtml" />
+    <Content Include="Views\Donations\Edit.cshtml" />
+    <Content Include="Views\Donations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\blog\" />
+    <Folder Include="Content\img\dogs\" />
+    <Folder Include="Content\img\history\" />
+    <Folder Include="Content\img\partner\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
